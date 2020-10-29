@@ -97,9 +97,16 @@ class ElectrumClient extends Client {
     this.reconnect = this.reconnect = this.onClose = this.keepAlive = () => {}; // dirty hack to make it stop reconnecting
   }
 
+  setReconnectCallback(callback) {
+    this.reconnectCallback = callback;
+  }
+
   reconnect() {
     console.log("electrum reconnect");
     this.initSocket();
+    if (this.reconnectCallback) {
+      this.reconnectCallback();
+    }
     return this.initElectrum(this.electrumConfig);
   }
 
