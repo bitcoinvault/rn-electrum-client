@@ -64,7 +64,10 @@ class ElectrumClient extends Client {
         this.reconnect();
       }
     }, 1000);
+    this.onConnectionClose();
   }
+
+  onConnectionClose() {}
 
   // ElectrumX persistancy
   keepAlive() {
